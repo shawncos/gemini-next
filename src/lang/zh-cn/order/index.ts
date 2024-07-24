@@ -33,6 +33,7 @@ export default {
   'order.apply.card.enter': '进入申请页面',
   'order.apply.table.info': '获取表结构',
   'order.apply.tab.sql': '填写SQL',
+  'order.apply.tab.assistant': '智能助手',
   'order.apply.tab.table': '表结构详情',
   'order.apply.tab.index': '索引详情',
   'order.apply.tab.source_id': '数据源ID:{env}',

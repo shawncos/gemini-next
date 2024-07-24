@@ -80,6 +80,7 @@ export default function () {
     source_id: '',
     relevant: [] as string[],
     work_id: '',
+    tables: [],
   });
 
   return {

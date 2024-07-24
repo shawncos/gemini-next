@@ -34,6 +34,7 @@ export default {
   'order.apply.card.enter': 'Enter to apply',
   'order.apply.table.info': 'Table structure',
   'order.apply.tab.sql': 'SQL',
+  'order.apply.tab.assistant': 'AI Assistant',
   'order.apply.tab.table': 'Table structure',
   'order.apply.tab.index': 'Index structure',
   'order.apply.tab.source_id': 'Source ID:{env}',

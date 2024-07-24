@@ -1,7 +1,7 @@
 export default {
   'setting.title': 'Settings',
   'setting.desc': 'Configuring Platform Parameters',
-
+  'setting.basic': 'Basic',
   'setting.message.push': 'Message Push',
   'setting.message.hook.addr': 'Dingding hook',
   'setting.message.hook.key': 'Dingding SecretKey',
@@ -58,4 +58,21 @@ export default {
   'setting.data.clear.alert':
     '1. After the maximum Limit is set, the results of all query statements cannot exceed the Limit. <br><br>2. After the query audit switch is enabled, all queries must be approved by the administrator. Off can be independent query',
   'setting.ldap.ssl': 'Enable ldaps',
+  'setting.ai.base_url': 'Base URL',
+  'setting.ai.proxy_url': 'Proxy url',
+  'setting.ai.proxy_url.tips': 'HTTP Proxy Address',
+  'setting.ai.base_url.tips':
+    'Must starts with http(s)://  default:https://api.openai.com',
+  'setting.ai.api_key': 'API_KEY',
+  'setting.ai.api_key.tips': 'User custom OpenAI Api Key',
+  'setting.ai.model': 'Custom Models',
+  'setting.ai.model.tips': '',
+  'setting.ai.temperature': 'Temperature',
+  'setting.ai.top': 'Top P',
+  'setting.ai.max_tokens': 'Max Tokens',
+  'setting.ai.presence_penalty': 'Presence Penalty',
+  'setting.ai.frequency_penalty': 'Frequency Penalty',
+  'setting.ai.advisor_prompt': 'SQL optimization prompts',
+  'setting.ai.sql_gen_prompt': 'SQL generate prompts',
+  'setting.ai.sql_agent_prompt': 'Mysql助手提示词',
 };

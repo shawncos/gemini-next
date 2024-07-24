@@ -27,6 +27,7 @@ export default {
   'query.profile.date': 'Apply Time',
   'query.profile.text': 'Content',
   'query.profile.approval': 'Approval Time',
+  'query.show.arch': 'Viewing Table Architecture',
   'query.show.table': 'Viewing Table Data',
   'query.editor.beauty': 'SQL beauty',
   'query.editor.merge': 'DDL merged',

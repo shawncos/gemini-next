@@ -51,25 +51,25 @@ const router = createRouter({
             },
           ],
         },
-        //   {
-        //     path: '/analysis',
-        //     name: 'analysis',
-        //     meta: {
-        //       title: 'SQL语句分析',
-        //     },
-        //     component: () => import('@/views/common/subLayout.vue'),
-        //     redirect: '/analysis/gpt',
-        //     children: [
-        //       {
-        //         path: '/analysis/gpt',
-        //         name: 'analysis/gpt',
-        //         meta: {
-        //           title: 'Analysis - SQL语句分析',
-        //         },
-        //         component: () => import('@/views/analysis/index.vue'),
-        //       },
-        //     ],
-        //   },
+        {
+          path: '/advisor',
+          name: 'advisor',
+          meta: {
+            title: 'AI 分析',
+          },
+          component: () => import('@/views/common/subLayout.vue'),
+          redirect: '/advisor/ai',
+          children: [
+            {
+              path: '/advisor/ai',
+              name: 'advisor/ai',
+              meta: {
+                title: 'Advisor - AI 分析',
+              },
+              component: () => import('@/views/advisor/index.vue'),
+            },
+          ],
+        },
         {
           path: '/apply',
           name: 'apply',

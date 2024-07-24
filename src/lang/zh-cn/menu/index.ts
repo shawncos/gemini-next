@@ -1,6 +1,7 @@
 export default {
   'menu.home': '首页',
   'menu.order.self': '我的工单',
+  'menu.order.advisor': 'AI 建议',
   'menu.order.analysis': 'SQL语句分析',
   'menu.order.apply': '工单申请',
   'menu.order.title': '审核',

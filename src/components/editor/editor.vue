@@ -4,7 +4,7 @@
     :style="{ height: height / 7 < 250 ? `250px` : `${height} px` }"
   ></div>
   <a-alert
-    :message="$t('common.editor.tips')"
+    :message="isAdvisor ? t('common.editor.adv') : t('common.editor.tips')"
     type="info"
     style="margin-top: 1%"
   />
@@ -13,7 +13,7 @@
 <script setup lang="ts">
   import * as monaco from 'monaco-editor';
   import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-  import { onMounted, onUnmounted } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { format } from 'sql-formatter';
   import { mergeDDLSTMT } from '@/apis/orderPostApis';
   import { useI18n } from 'vue-i18n';
@@ -29,6 +29,7 @@
     containerId: string;
     readonly?: boolean;
     isQuery?: boolean;
+    isAdvisor?: boolean;
   }
 
   const props = withDefaults(defineProps<Props>(), {
@@ -37,9 +38,11 @@
     isQuery: false,
   });
 
-  const emit = defineEmits(['getValues', 'changeContent']);
-
   const { t } = useI18n();
+
+  const valText = ref(t('query.editor.test'));
+
+  const emit = defineEmits(['getValues', 'changeContent', 'getSQLGen']);
 
   let model = {} as monaco.editor.IStandaloneCodeEditor;
 
@@ -78,8 +81,12 @@
 
   const GetValueFunc: monaco.editor.IActionDescriptor = {
     id: 'ms-test',
-    label: props.isQuery ? t('query.editor.query') : t('query.editor.test'),
-    keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_E],
+    label: props.isQuery
+      ? t('query.editor.query')
+      : props.isAdvisor
+      ? t('query.editor.advisor')
+      : t('query.editor.test'),
+    keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_2],
     contextMenuGroupId: 'navigation',
     contextMenuOrder: 1.5,
     run: function (ed: monaco.editor.ICodeEditor) {
@@ -94,6 +101,25 @@
       } else {
         emit('getValues', ed.getValue());
       }
+    },
+  };
+
+  const GetSQLGenFunc: monaco.editor.IActionDescriptor = {
+    id: 'ms-gen',
+    label: t('query.editor.text2sql'),
+    keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_1],
+    contextMenuGroupId: 'navigation',
+    contextMenuOrder: 1.5,
+    run: function (ed: monaco.editor.ICodeEditor) {
+      let s = ed.getModel() as monaco.editor.ITextModel;
+      let sel = s.getValueInRange(ed.getSelection() as monaco.Selection);
+      let text = '';
+      if (sel !== '') {
+        text = sel;
+      } else {
+        text = ed.getValue();
+      }
+      emit('getSQLGen', text);
     },
   };
 
@@ -112,6 +138,11 @@
   );
 
   onMounted(() => {
+    if (props.isAdvisor) {
+      valText.value = t('query.editor.advisor');
+    } else if (props.isQuery) {
+      valText.value = t('query.editor.query');
+    }
     model = monaco.editor.create(
       document.getElementById(props.containerId) as HTMLElement,
       {
@@ -124,11 +155,12 @@
         accessibilityHelpUrl: 'https://next.yearning.io',
       }
     );
-
-    model.addAction(beautyFunc);
+    // Add a valid expression here
     model.addAction(GetValueFunc);
     props.isQuery ? null : model.addAction(mergeDDL);
+    props.isAdvisor ? model.addAction(GetSQLGenFunc) : null;
 
+    model.addAction(beautyFunc);
     model.focus();
     model.onDidChangeModelContent(() => {
       emit('changeContent');

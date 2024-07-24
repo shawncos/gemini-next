@@ -41,10 +41,26 @@ export interface Other {
   domain: string;
 }
 
+export interface AI {
+  base_url: string;
+  api_key: string;
+  frequency_penalty: number;
+  max_tokens: number;
+  presence_penalty: number;
+  temperature: number;
+  top_p: number;
+  model: string;
+  advisor_prompt: string;
+  sql_gen_prompt: string;
+  sql_agent_prompt: string;
+  proxy_url: string;
+}
+
 export interface Settings {
   message: Message;
   ldap: LDAP;
   other: Other;
+  ai: AI;
 }
 
 export interface DeleteOrder {

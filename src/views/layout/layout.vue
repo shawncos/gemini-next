@@ -1,8 +1,13 @@
 <template>
   <div v-watermark="{ text: store.state.user.account.user }">
     <a-layout style="min-height: 100vh">
-      <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
-        <img :src="logoUrl" style="width: 150px" />
+      <a-layout-sider
+        v-model:collapsed="collapsed"
+        :trigger="null"
+        collapsible
+        :width="240"
+      >
+        <img :src="logoUrl" style="width: 135px" />
         <Menu></Menu>
       </a-layout-sider>
 

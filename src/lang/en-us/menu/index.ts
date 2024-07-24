@@ -1,6 +1,7 @@
 export default {
   'menu.home': 'Dash',
   'menu.order.self': 'My Order',
+  'menu.order.advisor': 'AI Advisor',
   'menu.order.analysis': 'SQL Analysis',
   'menu.order.apply': 'Apply',
   'menu.order.title': 'Audit',

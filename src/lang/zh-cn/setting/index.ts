@@ -1,7 +1,7 @@
 export default {
   'setting.title': '平台设置',
   'setting.desc': '配置平台参数',
-
+  'setting.basic': '基础设置',
   'setting.message.push': '消息推送',
   'setting.message.hook.addr': 'webhook地址',
   'setting.message.hook.key': 'webhook秘钥',
@@ -58,4 +58,20 @@ export default {
   'setting.data.clear.query': '指定时间内查询工单',
   'setting.data.clear.alert':
     '1.设置最大Limit数后，所有的查询语句的查询结果都不会超过这个数值。<br><br>2.查询审核开关开启后，所有的查询都必须通过管理员同意才能进行。关闭则可自主查询<br><br>3.启用GPT进行SQL语句分析请脱敏使用,防止敏感数据上传',
+  'setting.ai.base_url': '接口地址',
+  'setting.ai.proxy_url.tips': 'HTTP 代理地址',
+  'setting.ai.proxy_url': '代理地址',
+  'setting.ai.base_url.tips': '请填写接口地址，默认为:https://api.openai.com',
+  'setting.ai.api_key': 'API_KEY',
+  'setting.ai.api_key.tips': '请填写API_KEY',
+  'setting.ai.model': '模型',
+  'setting.ai.model.tips': '请填写模型',
+  'setting.ai.temperature': '随机性(temperature)',
+  'setting.ai.top': '核采样(top_p)',
+  'setting.ai.max_tokens': '单次回复限制(max_tokens)',
+  'setting.ai.presence_penalty': '话题新鲜度(presence_penalty)',
+  'setting.ai.frequency_penalty': '频率惩罚度(frequency_penalty)',
+  'setting.ai.advisor_prompt': 'SQL语句优化提示词',
+  'setting.ai.sql_gen_prompt': 'SQL语句生成提示词',
+  'setting.ai.sql_agent_prompt': 'Mysql助手提示词',
 };

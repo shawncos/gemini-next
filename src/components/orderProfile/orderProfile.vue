@@ -273,7 +273,7 @@
     checkSQL(sqls.value);
   }, 200);
 
-  const next = async () => {
+  const next = debounce(async () => {
     spinning.value = !spinning.value;
     await getNextOrderState({
       work_id: order.value.work_id as string,
@@ -283,16 +283,16 @@
     });
 
     spinning.value = !spinning.value;
-  };
+  }, 200);
 
-  const undoNext = async () => {
+  const undoNext = debounce(async () => {
     spinning.value = !spinning.value;
     await changeOrderStateUndo({
       work_id: order.value.work_id as string,
       tp: 'undo',
     });
     spinning.value = !spinning.value;
-  };
+  }, 200);
 
   const fetchState = async () => {
     useWebSocket(

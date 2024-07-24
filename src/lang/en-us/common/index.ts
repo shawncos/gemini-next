@@ -98,6 +98,7 @@ export default {
   'common.query': 'Query',
   'common.board': 'Board',
   'common.board.sub': 'Homepage Bulletin board content editing',
+  'common.advisor.sub': 'SQL optimization using chatGPT',
   'common.rule': 'Rules',
   'common.rule.sub':
     'Set audit rule conditions based on actual application scenarios',

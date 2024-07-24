@@ -45,6 +45,8 @@ export default {
   'common.history': '历史记录',
   'common.choose': '所选',
   'common.editor.tips': '🔼 编辑器内右键调出 检测/美化选项',
+  'common.editor.adv':
+    '🔼 选择对应的数据库/表，通过编辑器内右键调出 智能 SQL 生成/建议选项生成对应智能结果',
 
   'common.profile.title': '个人详情',
   'common.profile.subtitle': '个人信息修改',
@@ -96,6 +98,7 @@ export default {
   'common.query': '查询',
   'common.board': '公告',
   'common.board.sub': '主页公告栏内容编辑',
+  'common.advisor.sub': '使用ChatGPT进行SQL优化',
 
   'common.rule': '审核规则',
   'common.rule.sub': '根据实际使用场景设置审核规则条件',
@@ -122,5 +125,4 @@ export default {
   'common.lang.us': 'English',
   'common.lang.cn': '中文',
   'common.help': '帮助文档',
-  
 };

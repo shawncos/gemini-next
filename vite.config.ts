@@ -13,6 +13,12 @@ export default defineConfig({
       '/register': {
         target: 'http://127.0.0.1:8000',
       },
+      '/_next': {
+        target: 'http://127.0.0.1:8000',
+      },
+      '/chatbot': {
+        target: 'http://127.0.0.1:8000',
+      },
       '/fetch': {
         target: 'http://127.0.0.1:8000',
       },

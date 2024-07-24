@@ -55,6 +55,7 @@ export interface OrderTableData {
   source_id?: string;
   sql?: string;
   file?: string;
+  tables?: string[];
 }
 
 export interface OrderItem {
@@ -64,6 +65,7 @@ export interface OrderItem {
   source_id: string;
   data_base: string;
   table: string;
+  tables: string[];
   delay: string;
   text: string;
   backup: number;

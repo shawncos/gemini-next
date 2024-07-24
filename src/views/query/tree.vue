@@ -30,13 +30,12 @@
             <span v-else>{{ title }}</span>
           </template>
           <template #overlay>
-            <a-menu>
-              <a-menu-item
-                v-if="meta === 'Table'"
-                key="1"
-                @click="showTableData(treeKey)"
-              >
+            <a-menu v-if="meta === 'Table'">
+              <a-menu-item key="1" @click="showTableData(treeKey)">
                 {{ $t('query.show.table') }}</a-menu-item
+              >
+              <a-menu-item key="2" @click="showTableArch(treeKey)">
+                {{ $t('query.show.arch') }}</a-menu-item
               >
             </a-menu>
           </template>
@@ -118,6 +117,14 @@
       source_id: store.state.common.queryInfo.source_id,
       schema: schema.value,
       sql: `select * from ${key}`,
+    });
+  };
+
+  const showTableArch = (key: string) => {
+    emit('showTableRef', {
+      source_id: store.state.common.queryInfo.source_id,
+      schema: schema.value,
+      sql: `SHOW COLUMNS FROM ${key}`,
     });
   };
 
