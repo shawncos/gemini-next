@@ -52,6 +52,7 @@
   import { onMounted, reactive, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { ISource, querySourceList } from '@/apis/source';
+  import { debounce } from 'lodash-es';
 
   defineProps<{
     isExport: boolean;
@@ -76,9 +77,9 @@
 
   const loading = ref(true);
 
-  const postQuery = async () => {
-    await queryPostOrder(form);
-  };
+  const postQuery = debounce(() => {
+    queryPostOrder(form);
+  }, 200);
 
   onMounted(async () => {
     const { data } = await querySourceList('query');

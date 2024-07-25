@@ -203,13 +203,6 @@
   import { COMMON_URI } from '@/config/request';
   import editor from '@/components/editor/editor.vue';
 
-  interface stepUsage {
-    action: string;
-    time: string;
-    username: string;
-    id: number;
-  }
-
   const spinning = ref(false);
 
   const { col } = JunoMixin();
@@ -332,9 +325,6 @@
         );
       }
     }
-
-    //     const step = await fetchStepUsage(order.value.work_id);
-    //     usage.value = step.data.payload;
     const sql = await fetchProfileSQL(order.value.work_id);
     orderEditor.value.ChangeEditorText(sql.data.payload.sqls);
 

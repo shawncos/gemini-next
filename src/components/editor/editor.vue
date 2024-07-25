@@ -86,7 +86,7 @@
       : props.isAdvisor
       ? t('query.editor.advisor')
       : t('query.editor.test'),
-    keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_2],
+    keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_E],
     contextMenuGroupId: 'navigation',
     contextMenuOrder: 1.5,
     run: function (ed: monaco.editor.ICodeEditor) {

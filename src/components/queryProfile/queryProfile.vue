@@ -91,6 +91,7 @@
   import { useI18n } from 'vue-i18n';
   import CommonMixins from '@/mixins/common';
   import { StateQueryUsage } from '@/lib';
+  import { debounce } from 'lodash-es';
 
   interface QueryRef {
     work_id: string;
@@ -135,13 +136,13 @@
 
   const order = ref<QueryRef>({} as QueryRef);
 
-  const queryAgree = async () => {
-    await queryAgreeOrder(order.value.work_id);
-  };
+  const queryAgree = debounce(() => {
+    queryAgreeOrder(order.value.work_id);
+  }, 200);
 
-  const queryReject = async () => {
-    await queryRejectOrder(order.value.work_id);
-  };
+  const queryReject = debounce(() => {
+    queryRejectOrder(order.value.work_id);
+  }, 200);
 
   const currentPage = async (page: number) => {
     const { data } = await queryProfile(order.value.work_id, page);

@@ -26,4 +26,5 @@ export default {
   'db.ssl.ca': 'CA cert',
   'db.ssl.certificate': 'Cert',
   'db.ssl.key': 'Key File',
+  'db.global': 'Default audit rule',
 };

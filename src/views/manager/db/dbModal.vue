@@ -109,6 +109,9 @@
           </a-form-item>
           <a-form-item :label="$t('common.rules')">
             <a-select v-model:value="dbForm.rule_id" style="width: 100%">
+              <a-select-option :key="-1" :value="0">{{
+                $t('db.global')
+              }}</a-select-option>
               <a-select-option v-for="i in rules" :key="i.id" :value="i.id">{{
                 i.desc
               }}</a-select-option>

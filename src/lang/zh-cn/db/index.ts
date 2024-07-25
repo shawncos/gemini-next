@@ -26,4 +26,5 @@ export default {
   'db.excluded.schema': '排除的数据库',
   'db.excluded.field': '脱敏字段',
   'db.edit.title': '数据源信息',
+  'db.global': '默认审核规则',
 };
