@@ -3,6 +3,13 @@
     :id="props.containerId"
     :style="{ height: height / 7 < 250 ? `250px` : `${height} px` }"
   ></div>
+  <a-space style="margin-top: 5px">
+    <a-button type="primary" @click="btnGetValue">{{ getValBtnName }}</a-button>
+    <a-button v-if="props.isAdvisor" @click="btnGenSQL">{{
+      $t('query.editor.text2sql')
+    }}</a-button>
+    <a-button @click="btnSetValue">{{ $t('query.editor.beauty') }}</a-button>
+  </a-space>
   <a-alert
     :message="isAdvisor ? t('common.editor.adv') : t('common.editor.tips')"
     type="info"
@@ -13,7 +20,7 @@
 <script setup lang="ts">
   import * as monaco from 'monaco-editor';
   import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-  import { onMounted, onUnmounted, ref } from 'vue';
+  import { onMounted, onUnmounted } from 'vue';
   import { format } from 'sql-formatter';
   import { mergeDDLSTMT } from '@/apis/orderPostApis';
   import { useI18n } from 'vue-i18n';
@@ -40,13 +47,41 @@
 
   const { t } = useI18n();
 
-  const valText = ref(t('query.editor.test'));
+  const getValBtnName = props.isQuery
+    ? t('query.editor.query')
+    : props.isAdvisor
+    ? t('query.editor.advisor')
+    : t('query.editor.test');
 
   const emit = defineEmits(['getValues', 'changeContent', 'getSQLGen']);
 
   let model = {} as monaco.editor.IStandaloneCodeEditor;
 
   let completionProvider: any;
+
+  const btnGetValue = () => {
+    const sel = emitSelectedOrAllValues(model);
+    sel !== '' ? emit('getValues', sel) : emit('getValues', model.getValue());
+  };
+
+  const btnGenSQL = () => {
+    const sel = emitSelectedOrAllValues(model);
+    sel !== '' ? emit('getSQLGen', sel) : emit('getSQLGen', model.getValue());
+  };
+
+  const btnSetValue = () => {
+    setEditorValue(model);
+  };
+
+  const setEditorValue = (ed: monaco.editor.ICodeEditor) => {
+    ed.setValue(format(ed.getValue()));
+  };
+
+  const emitSelectedOrAllValues = (ed: monaco.editor.ICodeEditor) => {
+    let s = ed.getModel() as monaco.editor.ITextModel;
+    let sel = s.getValueInRange(ed.getSelection() as monaco.Selection);
+    return sel;
+  };
 
   const beautyFunc: monaco.editor.IActionDescriptor = {
     id: 'ms-beauty',
@@ -55,7 +90,7 @@
     contextMenuGroupId: 'navigation',
     contextMenuOrder: 1.5,
     run: function (ed: monaco.editor.ICodeEditor) {
-      ed.setValue(format(ed.getValue()));
+      setEditorValue(ed);
     },
   };
 
@@ -81,26 +116,12 @@
 
   const GetValueFunc: monaco.editor.IActionDescriptor = {
     id: 'ms-test',
-    label: props.isQuery
-      ? t('query.editor.query')
-      : props.isAdvisor
-      ? t('query.editor.advisor')
-      : t('query.editor.test'),
+    label: getValBtnName,
     keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_E],
     contextMenuGroupId: 'navigation',
     contextMenuOrder: 1.5,
-    run: function (ed: monaco.editor.ICodeEditor) {
-      let s = ed.getModel() as monaco.editor.ITextModel;
-      let sel = s.getValueInRange(ed.getSelection() as monaco.Selection);
-      if (!props.isQuery) {
-        emit('getValues', ed.getValue());
-        return;
-      }
-      if (sel !== '') {
-        emit('getValues', sel);
-      } else {
-        emit('getValues', ed.getValue());
-      }
+    run: function () {
+      btnGetValue();
     },
   };
 
@@ -110,16 +131,8 @@
     keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_1],
     contextMenuGroupId: 'navigation',
     contextMenuOrder: 1.5,
-    run: function (ed: monaco.editor.ICodeEditor) {
-      let s = ed.getModel() as monaco.editor.ITextModel;
-      let sel = s.getValueInRange(ed.getSelection() as monaco.Selection);
-      let text = '';
-      if (sel !== '') {
-        text = sel;
-      } else {
-        text = ed.getValue();
-      }
-      emit('getSQLGen', text);
+    run: function () {
+      btnGenSQL();
     },
   };
 
@@ -138,11 +151,6 @@
   );
 
   onMounted(() => {
-    if (props.isAdvisor) {
-      valText.value = t('query.editor.advisor');
-    } else if (props.isQuery) {
-      valText.value = t('query.editor.query');
-    }
     model = monaco.editor.create(
       document.getElementById(props.containerId) as HTMLElement,
       {

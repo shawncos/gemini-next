@@ -51,6 +51,8 @@ export default {
   DMLWhere: 'Enforce that DML statements must have a WHERE condition',
   DMLOrder: 'Disallow DML statements from using the Order BY clause',
   DMLSelect: 'Disallow Select clauses for DML statements',
+  DMLWhereExprValueIsNull:
+    '在WHERE子句中，不允许将NULL值与其他字段或值进行比较操作',
   MaxAffectRows: 'DML affects the maximum number of rows',
   IsOSC: 'Start the online table change tool',
   OscSize:
@@ -60,4 +62,5 @@ export default {
   global: 'Global rules',
   custom_list: 'Custom rule list',
   custom: 'Custom rule',
+  ruleSearchTips: 'Please enter a rule description to search',
 };

@@ -209,6 +209,12 @@ const rule: Rule[] = [
     tp: 1,
   },
   {
+    name: 'DMLWhereExprValueIsNull',
+    desc: t('DMLWhereExprValueIsNull'),
+    type: 'DML',
+    tp: 0,
+  },
+  {
     name: 'DMLAllowLimitSTMT',
     desc: t('DMLAllowLimitSTMT'),
     type: 'DML',

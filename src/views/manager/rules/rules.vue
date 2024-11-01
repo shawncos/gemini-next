@@ -2,7 +2,7 @@
   <a-row>
     <a-col :span="19">
       <a-input-search
-        placeholder="input search text"
+        :placeholder="$t('ruleSearchTips')"
         enter-button
         @search="onSearch"
       />
@@ -14,7 +14,16 @@
     </a-col>
   </a-row>
   <br />
-  <a-table bordered :columns="col" :data-source="rules" :pagination="false">
+  <a-table
+    bordered
+    :columns="col"
+    :data-source="rules"
+    :pagination="{
+      pageSize: 20,
+      showTotal: (total:number) => $t('common.count', { count: total }),
+    }"
+    size="small"
+  >
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'action'">
         <a-switch
@@ -73,7 +82,13 @@
     {
       title: t('common.table.type'),
       dataIndex: 'type',
-      width: 50,
+      width: 80,
+      filters: [
+        { text: 'DDL', value: 'DDL' },
+        { text: 'DML', value: 'DML' },
+        { text: 'Online-DDL', value: 'Online-DDL' },
+      ],
+      onFilter: (value: string, record: any) => record.type.includes(value),
     },
     {
       title: t('common.desc'),

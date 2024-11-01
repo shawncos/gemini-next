@@ -20,6 +20,7 @@
       </a-select>
     </a-form-item>
   </a-form>
+  <div style="height: 5px;"></div>
   <Editor
     ref="query_editor"
     :container-id="props.id"

@@ -37,7 +37,7 @@ export default {
   DDLMaxCharLength: 'char字段最大长度',
   MaxTableNameLen: '表名最大长度',
   DMLMaxInsertRows: 'Insert最大插入行数上限',
-  DMLAllowLimitSTMT: '允许update/insert 语句使用limit关键字',
+  DMLAllowLimitSTMT: 'update/insert 语句必须携带Limit条件',
   DMLAllowInsertNull: '允许insert语句插入null值',
   DDLImplicitTypeConversion: '不允许隐式转换',
   DMLInsertColumns: '检查Insert语句中插入的字段名是否存在',
@@ -49,7 +49,10 @@ export default {
   OscSize: '表体积大于该值后触发在线表变更同步，单位:M',
   OSCExpr:
     '同步工具参数。如: PT-OSC 请注意! 此处仅填写参数。请使用以下变量名替换对应输入值 $SQL $ADDR $PORT $USER $PASSWORD $SCHEMA $TABLE。例子: (pt-osc配置) pt-online-schema-change  --alter $SQL --user=$USER  --password=$PASSWORD  --host=$ADDR P=$PORT,D=$SCHEMA,t=$TABLE  --execute',
+  DMLWhereExprValueIsNull:
+    '在WHERE子句中，不允许将NULL值与其他字段或值进行比较操作',
   global: '全局规则',
   custom_list: '自定义规则列表',
   custom: '自定义规则',
+  ruleSearchTips: '请输入规则描述进行搜索',
 };
