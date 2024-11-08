@@ -45,7 +45,12 @@
         </template>
       </c-table>
     </a-card>
-    <Profile :visible="visible" :width="width" @close="onClose" />
+    <Profile
+      :visible="visible"
+      :width="width"
+      @close="onClose"
+      @close-drawer="() => (visible = false)"
+    />
     <Delay ref="delay" />
   </div>
 </template>

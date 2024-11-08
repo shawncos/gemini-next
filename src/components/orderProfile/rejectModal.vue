@@ -12,8 +12,9 @@
 <script lang="ts" setup>
   import { getNextOrderState } from '@/apis/orderPostApis';
   import CommonMixins from '@/mixins/common';
-  import router from '@/router';
   import { ref } from 'vue';
+
+  const emit = defineEmits(['close']);
 
   const props = defineProps<{
     workId: string;
@@ -32,7 +33,7 @@
     });
     confirmLoading.value = false;
     turnState();
-    router.go(-1);
+    emit('close');
   };
 
   const { is_open, turnState } = CommonMixins();

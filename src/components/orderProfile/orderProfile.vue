@@ -174,6 +174,7 @@
     ref="r"
     :work-id="order.work_id"
     @spin="() => (spinning = !spinning)"
+    @close="() => emit('close')"
   ></RejectModal>
 </template>
 
@@ -202,6 +203,8 @@
   import { useWebSocket } from '@vueuse/core';
   import { COMMON_URI } from '@/config/request';
   import editor from '@/components/editor/editor.vue';
+
+  const emit = defineEmits(['close']);
 
   const spinning = ref(false);
 
@@ -267,14 +270,15 @@
   }, 200);
 
   const next = debounce(async () => {
+    enabled.value = true;
     spinning.value = !spinning.value;
+    emit('close');
     await getNextOrderState({
       work_id: order.value.work_id as string,
       flag: order.value.current_step as number,
       tp: 'agree',
       source_id: order.value.source_id,
     });
-
     spinning.value = !spinning.value;
   }, 200);
 

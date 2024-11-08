@@ -52,7 +52,7 @@ export default {
   DMLOrder: 'Disallow DML statements from using the Order BY clause',
   DMLSelect: 'Disallow Select clauses for DML statements',
   DMLWhereExprValueIsNull:
-    '在WHERE子句中，不允许将NULL值与其他字段或值进行比较操作',
+    'In a WHERE clause, it is not allowed to compare NULL values with other fields or values.',
   MaxAffectRows: 'DML affects the maximum number of rows',
   IsOSC: 'Start the online table change tool',
   OscSize:
